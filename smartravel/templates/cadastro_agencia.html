@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastre sua Agência</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+        }
+
+        h1 {
+          color: #333;
+        }
+
+        form {
+          margin-bottom: 20px;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+          padding: 5px;
+          width: 200px;
+        }
+
+        input[type="submit"] {
+          padding: 10px 20px;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+
+        button[type="button"] {
+          padding: 5px 10px;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+{% block content %}
+<button type="button"><a href="/agencia/principal/">Voltar</a></button>
+<br>
+<h1>Cadastre sua Agência</h1>
+<br>
+<form action="{% url 'cadastro_agencia' %}" method="post">
+    {% csrf_token %}
+    <label>Nome da Agência
+        <input type="text" name="nome" required>
+    </label>
+    <br>
+    <label>CNPJ
+    <input type="text" name="cnpj" required maxlength="14">
+    </label>
+    <br>
+    <label>Telefone
+    <input type="text" name="telefone" required maxlength="11">
+    </label>
+    <br>
+    <label>E-mail
+    <input type="text" name="email" required>
+    </label>
+    <br>
+    <label>Senha
+    <input type="password" name="senha" required>
+    </label>
+    <br>
+    <button type="submit">Cadastrar</button>
+</form>
+{% endblock %}
+</body>
+</html>

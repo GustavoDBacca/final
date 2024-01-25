@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Log-in</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+        }
+
+        h1 {
+          color: #333;
+        }
+
+        form {
+          margin-bottom: 20px;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+          padding: 5px;
+          width: 200px;
+        }
+
+        input[type="submit"] {
+          padding: 10px 20px;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+
+        button[type="button"] {
+          padding: 5px 10px;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Log-in</h1>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <label>Nome de usuário:</label>
+        <input type="text" placeholder="Username..." name="username">
+        <br>
+        <label>Senha:</label>
+        <input type="password" placeholder="Senha..." name="senha">
+        <br>
+        <br>
+        <input type="submit" value="Logar">
+        <button type="button"><a href="cadastro_usuario/">Cadastre-se</a></button>
+    </form>
+</body>
+</html>
