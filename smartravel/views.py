@@ -4,9 +4,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from .forms import CadastroUsuarioForm
 # from .forms import CadastroUsuarioForm
 
-from smartravel.models import Cidade, Local
+from smartravel.models import Cidade, Local, Usuario
 
 
 def home(request):
@@ -131,23 +132,23 @@ def local(request, local_slug):
         local = Local.objects.get(nome_local=local_slug)
         return render(request, "local.html", {'local':local})
 
-# def cadastro_usuario(request):
-#     if request.method == 'POST':
-#         form = CadastroUsuarioForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Cadastro realizado com sucesso!')
-#             return redirect('login')
-#         else:
-#             messages.error(request, 'Erro no cadastro. Verifique os dados informados.')
-#     else:
-#         form = CadastroUsuarioForm()
-#     return render(request, 'cadastro_usuario.html', {'form': form})
+def cadastro_usuario(request):
+    if request.method == 'POST':
+        form = CadastroUsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cadastro realizado com sucesso!')
+            return redirect('login')
+        else:
+            messages.error(request, 'Erro no cadastro. Verifique os dados informados.')
+    else:
+        form = CadastroUsuarioForm()
+    return render(request, 'cadastro_usuario.html', {'form': form})
 
 
-def cadastro_user(request):
+def cadastro_funcionario(request):
     if request.method == 'GET':
-        return render(request, 'cadastro_usuario.html')
+        return render(request, 'cadastro_funcionario.html')
     else:
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -162,7 +163,7 @@ def cadastro_user(request):
         if user:
             return HttpResponse('Usuário já cadastrado com este nome')
 
-        user = User.objects.create_user(username=username, email=email, password=senha)
+        user = User.objects.create_user(username=username, email=email, password=senha, is_staff=True)
         user.cod = cod
         user.save()
 

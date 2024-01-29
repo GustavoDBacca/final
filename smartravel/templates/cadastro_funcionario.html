@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastre-se</title>
+    <script src='script_cadastro.js'></script>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+        }
+
+        h1 {
+          color: #333;
+        }
+
+        form {
+          margin-bottom: 20px;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+          padding: 5px;
+          width: 200px;
+        }
+
+        input[type="submit"] {
+          padding: 10px 20px;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+
+        button[type="button"] {
+          padding: 5px 10px;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+{% block content %}
+<button type="button" onclick="history.back()">Voltar</button>
+<br>
+<h1>Cadastro de funcionário</h1>
+<br>
+<form action="{% url 'cadastro_funcionario' %}" method="POST">
+    {% csrf_token %}
+    <label>Nome Completo
+    <input type="text" placeholder="Username..." name="username" required>
+    </label>
+    <br>
+    <label>CPF
+    <input type="number" name="doc" placeholder="Somente números" required>
+    </label>
+    <br>
+    <label>E-mail
+    <input type="text" placeholder="Email..." name="email">
+    </label>
+    <br>
+    <label>Senha
+    <input type="text" placeholder="Senha..." name="senha" required>
+    </label>
+    <br>
+    <input type="submit" value="cadastrar">
+</form>
+{% endblock %}
+</body>
+</html>
