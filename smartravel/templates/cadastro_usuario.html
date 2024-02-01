@@ -65,21 +65,7 @@
 <br>
 <form action="{% url 'cadastro_usuario' %}" method="POST">
     {% csrf_token %}
-    <label>Nome Completo
-    <input type="text" placeholder="Username..." name="username" required>
-    </label>
-    <br>
-    <label>CPF
-    <input type="number" name="doc" placeholder="Somente números" required>
-    </label>
-    <br>
-    <label>E-mail
-    <input type="text" placeholder="Email..." name="email">
-    </label>
-    <br>
-    <label>Senha
-    <input type="text" placeholder="Senha..." name="senha" required>
-    </label>
+    {{ form.as_p }}
     <br>
     <input type="submit" value="cadastrar">
 </form>

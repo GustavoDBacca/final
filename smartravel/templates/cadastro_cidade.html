@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Local</title>
+    <title>Cadastro de Cidade</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -16,7 +17,7 @@
     }
     
     form {
-        max-width: 600px;
+        max-width: 400px;
         margin: 20px auto;
         padding: 20px;
         background-color: #fff;
@@ -30,7 +31,6 @@
     }
     
     input,
-    select,
     textarea {
         width: 100%;
         padding: 8px;
@@ -46,43 +46,17 @@
         border-radius: 5px;
         cursor: pointer;
     }
-    
-    .card {
-        background-color: #fff;
-        padding: 20px;
-        margin: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .card-title {
-        color: #333;
-    }
-    
-    .card-description {
-        color: #666;
-    }
-    
-    a {
-        text-decoration: none;
-        color: #333;
-    }
-    
-    a:hover {
-        color: #4caf50;
-    }
 </style>
-    <!-- Adicione links para seus estilos CSS se necessário -->
 </head>
 <body>
 
-<h1>Cadastro de Local</h1>
+    <h1>Cadastro de Cidade</h1>
 
-    <form method="post" action="{% url 'cadastro_local' %}">
+    <form method="post" action="{% url 'cadastro_cidade' %}">
         {% csrf_token %}
         {{ form.as_p }}
+        <button type="submit">Cadastrar Cidade</button>
+    </form>
 
-        <button type="submit">Cadastrar Local</button>
-        </form>
 </body>
 </html>

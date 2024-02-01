@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+    }
+
+    #menu {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    #menu ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #menu ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    #menu ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .card {
+    height: 120px;
+    width: 120px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px (0, 0, 0, 0.1);
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 200px;
+    }
+
+    .card-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    }
+
+    .card-description {
+      font-size: 18px;
+    }
+
+  </style>
+</head>
+<body>
+  <nav id='menu'>
+    <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+    <ul>
+      <li><a href='/'>Home</a></li>
+      <li><a href='/servicos'>Serviços</a></li>
+      <li><a href='/unidades'>Unidades</a></li>
+      <li><a href='/franqueados'>Seja um franqueado</a></li>
+      <li><a href='/loja'>Loja</a></li>
+      <li><a href='/parcerias'>Parcerias</a></li>
+      <li><a href='https://play.google.com/store/apps?hl=pt_BR&gl=US'>Baixe nosso app</a></li>
+      <li><a href='https://web.whatsapp.com/'>Contato</a></li>
+      <li><a href='login/'><i class="fas fa-user"></i></a></li>
+    </ul>
+  </nav>
+</body>
+</html>
+{% endblock %}

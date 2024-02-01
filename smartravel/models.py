@@ -22,30 +22,6 @@ class Agencia(models.Model):
 
     def __str__(self):
         return self.nome
-
-
-# class Cadastro_Restaurante(models.Model):
-#     nome_restaurante = models.SlugField(max_length=254, verbose_name='Nome Restaurante', unique='False')
-#     descricao = models.CharField(max_length=254, verbose_name='Descrição')
-#     cidade = models.CharField(max_length=254, verbose_name='Cidade')
-#     bairro = models.CharField(max_length=254,verbose_name='Bairro')
-#     rua = models.CharField(max_length=254, verbose_name='Rua')
-#     telefone = models.CharField(max_length=14, verbose_name='Telefone', blank=True)
-#     email = models.EmailField(max_length=254, verbose_name='Email', blank=True)
-
-#     def __str__(self):
-#         return self.nome_restaurante
-
-
-# class Ponto_turistico(models.Model):
-#     nome = models.CharField(max_length=254, verbose_name='Nome do Ponto')
-#     descricao = models.CharField(max_length=254, verbose_name='Descrição')
-#     cidade = models.CharField(max_length=254, verbose_name='Cidade')
-#     bairro = models.CharField(max_length=254, verbose_name='Bairro')
-#     rua = models.CharField(max_length=254, verbose_name='Rua')
-
-    # def __str__(self):
-    #     return self.nome
     
 
 class Cidade(models.Model):
@@ -57,13 +33,21 @@ class Cidade(models.Model):
     
 
 class Local(models.Model):
-    nome_local = models.CharField(max_length=254, verbose_name='Nome do Ponto')
+    nome_local = models.CharField(max_length=254, verbose_name='Nome do Local')
     descricao = models.CharField(max_length=254, verbose_name='Descrição')
     cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE, related_name='local')
     bairro = models.CharField(max_length=254, verbose_name='Bairro')
     rua = models.CharField(max_length=254, verbose_name='Rua')
     telefone = models.CharField(max_length=14, verbose_name='Telefone', blank=True)
-    email = models.EmailField(max_length=254, verbose_name='Email', blank=True)  
+    email = models.EmailField(max_length=254, verbose_name='Email', blank=True)
+
+    TIPO_CHOICES = [
+        ('restaurante', 'Restaurante'),
+        ('museu', 'Museu'),
+        ('hotel', 'Hotel'),
+        ]
+    
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='restaurante')
 
     def __str__(self):
-        return self.nome_local
+        return self.nome_local  
