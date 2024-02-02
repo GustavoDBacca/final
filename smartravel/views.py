@@ -47,8 +47,6 @@ def viajante(request):
 
 
 
-
-
 def cadastro_local(request):
     if request.method == 'GET':
         form = CadastroLocalForm()
@@ -57,13 +55,27 @@ def cadastro_local(request):
     elif request.method == 'POST':
         form = CadastroLocalForm(request.POST)
         if form.is_valid():
-            novo_local = form.save(commit=False)
-            novo_local.tipo = form.cleaned_data['tipo']  
-            novo_local.save()
             form.save()
             return HttpResponse('Local cadastrado com sucesso')
         else:
             return HttpResponse('Erro no formulário. Verifique os dados informados.')
+
+# views.py
+
+#esse é o teste
+# def cadastro_local(request):
+#     if request.method == 'GET':
+#         form = CadastroLocalForm()
+#         cidades = Cidade.objects.all()
+#         return render(request, 'cadastro_local.html', {'cidades': cidades, 'form': form})
+#     elif request.method == 'POST':
+#         form = CadastroLocalForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponse('Local cadastrado com sucesso')
+#         else:
+#             return HttpResponse('Erro no formulário. Verifique os dados informados.')
+
 
 
 def cidade(request, city_slug):
@@ -74,7 +86,7 @@ def cidade(request, city_slug):
         if categoria == None:
             local = cidade.local.all()
         else:
-            local = Local.objects.filter(cidade__nome_cidade=city_slug, tipo=categoria.lower())
+            local = Local.objects.filter(cidade__nome_cidade=city_slug, tipo__categorias=categoria)
         return render(request, "cidade.html", {'cidade':cidade, 'locais':local, 'categorias':categorias})
 
 

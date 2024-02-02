@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cidade, Local, Usuario
+from .models import Cidade, Local, Usuario, Categorias
 
 
 class CadastroUsuarioForm(forms.ModelForm):
@@ -15,12 +15,14 @@ class CadastroLocalForm(forms.ModelForm):
         cidade = forms.ModelChoiceField(queryset=Cidade.objects.all())
         fields = ['nome_local', 'descricao', 'cidade', 'bairro', 'rua', 'telefone', 'email', 'tipo']
 
-    TIPO_CHOICES = [
-        ('restaurante', 'Restaurante'),
-        ('museu', 'Museu'),
-        ('hotel', 'Hotel'),
-    ]
-    tipo = forms.ChoiceField(choices=TIPO_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+
+        tipo = forms.ModelChoiceField(queryset=Categorias.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-control'}))
+    # TIPO_CHOICES = [
+    #     ('restaurante', 'Restaurante'),
+    #     ('museu', 'Museu'),
+    #     ('hotel', 'Hotel'),
+    # ]
+    # tipo = forms.ChoiceField(choices=TIPO_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
 
 
 class CadastroCidadeForm(forms.ModelForm):
