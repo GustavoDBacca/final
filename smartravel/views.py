@@ -6,8 +6,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CadastroCidadeForm, CadastroLocalForm, CadastroUsuarioForm
-# from .forms import CadastroUsuarioForm
-from django.db.models import Q
 
 from smartravel.models import Categorias, Cidade, Local, Usuario
 
@@ -60,30 +58,13 @@ def cadastro_local(request):
         else:
             return HttpResponse('Erro no formulário. Verifique os dados informados.')
 
-# views.py
-
-#esse é o teste
-# def cadastro_local(request):
-#     if request.method == 'GET':
-#         form = CadastroLocalForm()
-#         cidades = Cidade.objects.all()
-#         return render(request, 'cadastro_local.html', {'cidades': cidades, 'form': form})
-#     elif request.method == 'POST':
-#         form = CadastroLocalForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponse('Local cadastrado com sucesso')
-#         else:
-#             return HttpResponse('Erro no formulário. Verifique os dados informados.')
-
-
 
 def cidade(request, city_slug):
     if request.method == 'GET':
         cidade = Cidade.objects.get(nome_cidade=city_slug)
         categorias = Categorias.objects.all()
         categoria = request.GET.get('categoria')
-        if categoria == None:
+        if categoria is None:
             local = cidade.local.all()
         else:
             local = Local.objects.filter(cidade__nome_cidade=city_slug, tipo__categorias=categoria)

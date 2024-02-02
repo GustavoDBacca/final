@@ -17,12 +17,6 @@ class CadastroLocalForm(forms.ModelForm):
 
 
         tipo = forms.ModelChoiceField(queryset=Categorias.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-control'}))
-    # TIPO_CHOICES = [
-    #     ('restaurante', 'Restaurante'),
-    #     ('museu', 'Museu'),
-    #     ('hotel', 'Hotel'),
-    # ]
-    # tipo = forms.ChoiceField(choices=TIPO_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
 
 
 class CadastroCidadeForm(forms.ModelForm):
