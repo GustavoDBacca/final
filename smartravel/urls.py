@@ -12,7 +12,4 @@ urlpatterns = [
     path('viajante/principal/', views.viajante, name='viajante'),
     path('login/', views.login_user, name='login'),
     path('login/cadastro_usuario/', views.cadastro_usuario, name='cadastro_usuario'),
-    
-    # path('agencia/principal/', views.agencia, name='agencia'),
-    # path('cadastro_agencia/', views.cadastro_agencia, name='cadastro_agencia'),
 ]

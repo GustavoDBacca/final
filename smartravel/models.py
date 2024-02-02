@@ -42,12 +42,17 @@ class Local(models.Model):
     email = models.EmailField(max_length=254, verbose_name='Email', blank=True)
 
     TIPO_CHOICES = [
-        ('restaurante', 'Restaurante'),
-        ('museu', 'Museu'),
-        ('hotel', 'Hotel'),
+        ('restaurantes', 'Restaurante'),
+        ('museus', 'Museu'),
+        ('hoteis', 'Hotel'),
         ]
     
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='restaurante')
 
     def __str__(self):
         return self.nome_local  
+
+
+class Categorias(models.Model):
+    id_categorias = models.AutoField(primary_key=True)
+    categorias = models.CharField(max_length=100)

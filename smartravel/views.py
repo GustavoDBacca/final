@@ -9,7 +9,7 @@ from .forms import CadastroCidadeForm, CadastroLocalForm, CadastroUsuarioForm
 # from .forms import CadastroUsuarioForm
 from django.db.models import Q
 
-from smartravel.models import Cidade, Local, Usuario
+from smartravel.models import Categorias, Cidade, Local, Usuario
 
 
 def home(request):
@@ -46,6 +46,9 @@ def viajante(request):
     return render(request, template_name='viajante.html')
 
 
+
+
+
 def cadastro_local(request):
     if request.method == 'GET':
         form = CadastroLocalForm()
@@ -66,14 +69,20 @@ def cadastro_local(request):
 def cidade(request, city_slug):
     if request.method == 'GET':
         cidade = Cidade.objects.get(nome_cidade=city_slug)
-        return render(request, "cidade.html", {'cidade':cidade, 'locais':cidade.local.all()})
+        categorias = Categorias.objects.all()
+        categoria = request.GET.get('categoria')
+        if categoria == None:
+            local = cidade.local.all()
+        else:
+            local = Local.objects.filter(cidade__nome_cidade=city_slug, tipo=categoria.lower())
+        return render(request, "cidade.html", {'cidade':cidade, 'locais':local, 'categorias':categorias})
 
 
 def local(request, local_slug):
     if request.method == 'GET':
         local = Local.objects.get(nome_local=local_slug)
         return render(request, "local.html", {'local':local})
-
+    
 
 def cadastro_usuario(request):
     if request.method == 'POST':
@@ -115,7 +124,7 @@ def cadastro_funcionario(request):
 
 def cadastro_cidades(request):
     if request.method == 'POST':
-        form = CadastroCidadeForm()
+        form = CadastroCidadeForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')

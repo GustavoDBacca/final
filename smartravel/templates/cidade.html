@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Cidade</title>
-<style>
-    body {
+  <head>
+    <title>Cidade</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
         font-family: Arial, sans-serif;
         margin: 20px;
-    }
+      }
 
-    h1 {
+      h1 {
         color: #333;
-    }
+      }
 
-    .card {
+      .card {
         height: 200px;
         width: 10%;
         border: 1px solid #ddd;
@@ -21,43 +32,70 @@
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: box-shadow 0.3s ease;
-    }
+      }
 
-    .card:hover {
+      .card:hover {
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
+      }
 
-    .card-title {
-        color: #007BFF;
+      .card-title {
+        color: #007bff;
         margin-bottom: 5px;
-    }
+      }
 
-    .card-description {
+      .card-description {
         color: #555;
-    }
+      }
 
-    a {
+      a {
         text-decoration: none;
-    }
+      }
 
-    a:hover {
+      a:hover {
         text-decoration: underline;
-    }
-</style>
-</head>
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Categorias</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% for categoria in categorias %}
+            <li class="nav-item">
+              <a class="nav-link" href="/cidade/{{cidade.nome_cidade}}?categoria={{categoria.categorias}}"
+                >{{categoria.categorias}}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<nav>
-</nav>
-
-<body>
+    <br />
     <h1>Cidade</h1>
-    {{cidade.nome_cidade}}
-        {% for local in locais %}
-            <div class="card">
-                <a href="/local/{{local.nome_local}}">
-                <h2 class="card-title">{{local.nome_local}}</h2>
-                <p class="card-description">Descrição</p>
-                </a>
-            </div>
-        {% endfor %}
-</body>
+    {{cidade.nome_cidade}} 
+    
+    {% for local in locais %}
+    
+    <div class="card">
+      <a href="/local/{{local.nome_local}}">
+        <h2 class="card-title">{{local.nome_local}}</h2>
+        <p class="card-description">Descrição</p>
+      </a>
+    </div>
+    {% endfor %}
+  </body>
+</html>
