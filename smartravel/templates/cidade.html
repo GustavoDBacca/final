@@ -91,7 +91,7 @@
     {% for local in locais %}
     
     <div class="card">
-      <a href="/local/{{local.nome_local}}">
+      <a href="{% url 'local' local_id=local.id %}">
         <h2 class="card-title">{{local.nome_local}}</h2>
         <p class="card-description">Descrição</p>
       </a>

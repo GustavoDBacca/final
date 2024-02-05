@@ -59,6 +59,12 @@ def cadastro_local(request):
             return HttpResponse('Erro no formulário. Verifique os dados informados.')
 
 
+def local(request, local_id):
+    if request.method == 'GET':
+        local = get_object_or_404(Local, id=local_id)
+        return render(request, "local.html", {'local': local})
+
+
 def cidade(request, city_slug):
     if request.method == 'GET':
         cidade = Cidade.objects.get(nome_cidade=city_slug)
@@ -69,12 +75,6 @@ def cidade(request, city_slug):
         else:
             local = Local.objects.filter(cidade__nome_cidade=city_slug, tipo__categorias=categoria)
         return render(request, "cidade.html", {'cidade':cidade, 'locais':local, 'categorias':categorias})
-
-
-def local(request, local_slug):
-    if request.method == 'GET':
-        local = Local.objects.get(nome_local=local_slug)
-        return render(request, "local.html", {'local':local})
     
 
 def cadastro_usuario(request):

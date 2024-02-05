@@ -49,3 +49,4 @@ class Local(models.Model):
     telefone = models.CharField(max_length=14, verbose_name='Telefone', blank=True)
     email = models.EmailField(max_length=254, verbose_name='Email', blank=True)
     tipo = models.ForeignKey(Categorias, on_delete=models.CASCADE, null=True, blank=True, related_name='locais')
+    id = models.AutoField(primary_key=True)
