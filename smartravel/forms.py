@@ -13,7 +13,7 @@ class CadastroLocalForm(forms.ModelForm):
     class Meta:
         model = Local
         cidade = forms.ModelChoiceField(queryset=Cidade.objects.all())
-        fields = ['nome_local', 'descricao', 'cidade', 'bairro', 'rua', 'telefone', 'email', 'tipo']
+        fields = ['nome_local', 'descricao', 'cidade', 'bairro', 'rua', 'telefone', 'email', 'tipo', 'id']
         tipo = forms.ModelChoiceField(queryset=Categorias.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-control'}))
 
 class CadastroCidadeForm(forms.ModelForm):
