@@ -1,0 +1,18 @@
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>Carrinho de Compras</title>
+</head>
+<body>
+    <h1>Seu Carrinho de Compras</h1>
+    {% if locais_no_carrinho %}
+        <ul>
+            {% for local in locais_no_carrinho %}
+                <li>{{ local.nome_local }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Seu carrinho está vazio.</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}

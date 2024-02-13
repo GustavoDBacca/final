@@ -1,8 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Log-in</title>
-    <style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Sign In</title>
+</head>
+<body>
+  {% load socialaccount %}
+  <h2>Google Login</h2>
+  <a href="{% provider_login_url 'google' %}?next=/">Faça Login com o Google</a>
+
+  {% if user.is_authenticated %}
+  <p> Você ja está logado como {{user.email}}</p>
+  <a href='/logout'>Logout</a>
+  {% endif %}
+</body>
+</html>
+    {% comment %} <style>
         body {
           font-family: Arial, sans-serif;
           background-color: #f2f2f2;
@@ -67,6 +82,4 @@
         <br>
         <input type="submit" value="Logar">
         <button type="button"><a href="cadastro_usuario/">Cadastre-se</a></button>
-    </form>
-</body>
-</html>
+    </form> {% endcomment %}

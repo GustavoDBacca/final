@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+SITE_ID=2
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +40,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'smartravel',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        'SCOPE': [
+            "profile",
+            "email"
+        ],
+        "AUTH_PARAMS": {"access_type": "online"},
+}
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'final.urls'
@@ -133,4 +151,11 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-'''AUTH_USER_MODEL = 'smartravel.models.Viajante', 'smartravel.models.Agencia'''
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend", 
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+LOGIN_REDIRECT_URL = "/"
+# LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/login/"

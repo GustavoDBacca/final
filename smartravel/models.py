@@ -50,3 +50,8 @@ class Local(models.Model):
     email = models.EmailField(max_length=254, verbose_name='Email', blank=True)
     tipo = models.ForeignKey(Categorias, on_delete=models.CASCADE, null=True, blank=True, related_name='locais')
     id = models.AutoField(primary_key=True)
+
+
+# class Carrinho(models.Model):
+#     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+#     locais = models.ManyToManyField(Local)

@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CadastroCidadeForm, CadastroLocalForm, CadastroUsuarioForm
-
 from smartravel.models import Categorias, Cidade, Local, Usuario
+from django.contrib.auth import logout
 
 
 def home(request):
@@ -15,34 +15,9 @@ def home(request):
     print(request.user)
     return render(request, 'home.html', {'cidades':cidades})
 
-
-def redirect_viajante(request):
-    if request.method == 'POST':
-        doc = request.POST.get('doc')
-        senha = request.POST.get('senha')
-
-        if len(doc) != 11:
-            messages.error(request, 'Número de CPF inválido.')
-            return redirect('index')
-
-        user = authenticate(username=doc, password=senha)
-
-        if user is not None:
-            login_user(request)
-            return redirect('viajante')
-        else:
-            messages.error(request, 'Credenciais inválidas.')
-
-    return redirect('index')
-
-
-def viajante(request):
-    if request.GET.get('blogout'):
-        logout(request)
-        messages.success(request, 'Sessão encerrada.')
-        return redirect('index')
-    return render(request, template_name='viajante.html')
-
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 
 def cadastro_local(request):
@@ -145,3 +120,16 @@ def login_user(request):
                 return HttpResponse('email ou senha inválidos')
             return HttpResponse('Necessita de estar logado')
         
+
+# def adicionar_ao_carrinho(request, local_id):
+#     local = get_object_or_404(Local, id=local_id)
+#     if request.method == 'POST':
+#         carrinho, _ = Carrinho.objects.get_or_create(usuario=request.user)
+#         carrinho.locais.add(local)
+#         return redirect('carrinho')
+    
+    
+# def carrinho(request):
+#     carrinho, _ = Carrinho.objects.get_or_create(usuario=request.user)
+#     locais = carrinho.locais.all()
+#     return render(request, "carrinho.html", {"carrinho": locais})
